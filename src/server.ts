@@ -4,6 +4,7 @@ import config from "./config";
 // routes
 import indexRoutes from "./routes";
 import groupRoutes from "./routes/group";
+import userRoutes from "./routes/user";
 
 const server = express();
 
@@ -18,4 +19,5 @@ server.listen(config.SERVER.port, () => {
 
   server.use("/", indexRoutes);
   server.use("/api/group", groupRoutes);
+  server.use("/api/user", userRoutes);
 });

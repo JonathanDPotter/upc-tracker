@@ -44,8 +44,8 @@ const register = async (req: Request, res: Response) => {
         password: hash,
       });
 
-      const result = await newUser.save();
-      res.status(201).json(result);
+      const { _id } = await newUser.save();
+      res.status(201).json({ _id, username });
     }
   } catch (error: any) {
     res.json({ error });
@@ -75,7 +75,10 @@ const updateUser = async (req: Request, res: Response) => {
     const result = await User.findByIdAndUpdate(req.params, req.body, {
       new: true,
     });
-    res.status(200).json(result);
+    if (result) {
+      const { _id } = result;
+      res.status(200).json({ _id, message: "updated" });
+    }
   } catch (error: any) {
     res.json(error);
   }
@@ -84,7 +87,10 @@ const updateUser = async (req: Request, res: Response) => {
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const deleted = await User.findByIdAndDelete(req.params._id);
-    res.status(200).json(deleted);
+    if (deleted) {
+      const { username } = deleted;
+      res.status(200).json({ username, message: "deleted" });
+    }
   } catch (error: any) {
     res.json(error);
   }
