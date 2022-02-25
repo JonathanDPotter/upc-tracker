@@ -7,10 +7,10 @@ import groupRoutes from "./routes/group";
 
 const server = express();
 
-server.listen(config.server.port, () => {
-  console.log(`Server listening on port: ${config.server.port}`);
-  mongoose.connect(config.mongo.url, config.mongo.options, () =>
-    console.log(`Connected to mongodb collection ${config.mongo.collection}`)
+server.listen(config.SERVER.port, () => {
+  console.log(`Server listening on port: ${config.SERVER.port}`);
+  mongoose.connect(config.MONGO.url, config.MONGO.options, () =>
+    console.log(`Connected to mongodb collection ${config.MONGO.collection}`)
   );
 
   server.use(express.json());
