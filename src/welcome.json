@@ -1,1 +1,35 @@
-{ "message": "Welcome to the UPC tracker API" }
+{
+  "message": "Welcome to the UPC tracker API",
+  "routes": {
+    "user": {
+      "root": "/api/user",
+      "get": {
+        "/validate": "validates user by bearer token",
+        "/": "returns all user records",
+        "/:_id": "returns user record with specific _id"
+      },
+      "post": {
+        "/register": "creates a new user from {username, password}",
+        "/login": "returns validation token from {username, password}"
+      },
+      "put": { "/:_id": "updates user record with specific _id" },
+      "delete": { "/:_id": "deletes user with specific _id" }
+    },
+    "group": {
+      "root": "/api/group",
+      "get": {
+        "/": "returns all group records",
+        "/:_id": "returns group record with specific _id"
+      },
+      "post": {
+        "/": "creates a new group record"
+      },
+      "put": { "/:_id": "updates group record with specific _id" },
+      "delete": { "/:_id": "deletes group with specific _id" }
+    },
+    "index": {
+      "root": "/",
+      "get": { "": "returns this json object" }
+    }
+  }
+}
