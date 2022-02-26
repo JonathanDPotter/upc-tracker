@@ -22,7 +22,7 @@
         "/:_id": "returns group record with specific _id"
       },
       "post": {
-        "/": "creates a new group record"
+        "/": "creates a new group record with {title, upcs}"
       },
       "put": { "/:_id": "updates group record with specific _id" },
       "delete": { "/:_id": "deletes group with specific _id" }
