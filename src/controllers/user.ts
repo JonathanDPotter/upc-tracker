@@ -4,6 +4,10 @@ import Iuser from "../interfaces/user";
 import User from "../models/user";
 import signJWT from "../middleware/signJWT";
 
+const validateToken = (req: Request, res: Response) => {
+  return res.status(200).json({ message: "Token validated, user authorized." });
+};
+
 const login = async (req: Request, res: Response) => {
   let { username, password } = req.body as Iuser;
 
@@ -97,6 +101,7 @@ const deleteUser = async (req: Request, res: Response) => {
 };
 
 const controller = {
+  validateToken,
   register,
   login,
   getUsers,
