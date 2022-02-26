@@ -1,5 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
+// config
 import config from "./config";
 // routes
 import indexRoutes from "./routes";
@@ -10,13 +12,20 @@ const server = express();
 
 server.listen(config.SERVER.port, () => {
   console.log(`Server listening on port: ${config.SERVER.port}`);
+
+  // connect to mongoose
   mongoose.connect(config.MONGO.url, config.MONGO.options, () =>
     console.log(`Connected to mongodb collection ${config.MONGO.collection}`)
   );
 
+  // parsing requests
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));
 
+  // cors setup
+  server.use(cors());
+
+  // routes
   server.use("/", indexRoutes);
   server.use("/api/group", groupRoutes);
   server.use("/api/user", userRoutes);
