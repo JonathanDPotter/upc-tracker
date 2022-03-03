@@ -4,7 +4,7 @@ import extractJWT from "../middleware/extractJWT";
 
 const router = Router();
 
-router.post("/", extractJWT, controller.makeGroup);
+router.post("/", controller.makeGroup);
 
 router.get("/", controller.getGroups);
 

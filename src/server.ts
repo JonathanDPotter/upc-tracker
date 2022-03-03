@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import morgan from "morgan";
 // config
 import config from "./config";
 // routes
@@ -15,8 +16,11 @@ server.listen(config.SERVER.port, () => {
 
   // connect to mongoose
   mongoose.connect(config.MONGO.url, config.MONGO.options, () =>
-    console.log(`Connected to mongodb collection ${config.MONGO.collection}`)
+  console.log(`Connected to mongodb collection ${config.MONGO.collection}`)
   );
+
+  // add logging with morgan
+  server.use(morgan("dev"));
 
   // parsing requests
   server.use(express.json());

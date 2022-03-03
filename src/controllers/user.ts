@@ -58,7 +58,7 @@ const register = async (req: Request, res: Response) => {
 
 const getUsers = async (req: Request, res: Response) => {
   try {
-    const users = await User.find();
+    const users = await User.find().select("-password");
     res.status(200).json(users);
   } catch (error: any) {
     res.json(error);
