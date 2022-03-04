@@ -1,8 +1,11 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+// interfaces
 import Iuser from "../interfaces/user";
 import User from "../models/user";
+// utils
 import signJWT from "../middleware/signJWT";
+import config from "../config";
 
 const validateToken = (req: Request, res: Response) => {
   return res.status(200).json({ message: "Token validated, user authorized." });
@@ -34,25 +37,29 @@ const login = async (req: Request, res: Response) => {
 };
 
 const register = async (req: Request, res: Response) => {
-  let { username, password } = req.body as Iuser;
-  try {
-    const exists = await User.findOne({ username }).exec();
+  let { username, password, key } = req.body as Iuser;
+  if (key !== config.SERVER.apiKey) {
+    return res.json({ message: "Bad API key!" });
+  } else {
+    try {
+      const exists = await User.findOne({ username }).exec();
 
-    if (exists) {
-      return res.json({ message: "Username already in use." });
-    } else {
-      const hash = await bcrypt.hash(password, 10);
+      if (exists) {
+        return res.json({ message: "Username already in use." });
+      } else {
+        const hash = await bcrypt.hash(password, 10);
 
-      const newUser = new User({
-        username,
-        password: hash,
-      });
+        const newUser = new User({
+          username,
+          password: hash,
+        });
 
-      const { _id } = await newUser.save();
-      res.status(201).json({ _id, username });
+        const { _id } = await newUser.save();
+        res.status(201).json({ _id, username });
+      }
+    } catch (error: any) {
+      res.json({ error });
     }
-  } catch (error: any) {
-    res.json({ error });
   }
 };
 
