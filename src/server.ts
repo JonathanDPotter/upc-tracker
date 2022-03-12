@@ -29,10 +29,8 @@ server.listen(config.SERVER.port, () => {
   // cors setup
   server.use(
     cors({
-      origin: [
-        "https://jonathandpotter.github.io",
-        "https://upc-tracker.herokuapp.com/",
-      ],
+      origin: "*",
+      allowedHeaders: "*"
     })
   );
 
