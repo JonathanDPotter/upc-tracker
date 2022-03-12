@@ -28,7 +28,7 @@ server.listen(config.SERVER.port, () => {
 
   // cors setup
   server.use(
-    cors({ origin: "https://jonathandpotter.github.io/upc-tracker-front/" })
+    cors({ origin: "https://jonathandpotter.github.io" })
   );
 
   // routes
