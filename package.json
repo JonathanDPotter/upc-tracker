@@ -5,7 +5,8 @@
   "main": "server.ts",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "postinstall": "tsc"
+    "postinstall": "tsc",
+    "start": "node dist/server.js"
   },
   "engines": {
     "node": "17.5.0"
