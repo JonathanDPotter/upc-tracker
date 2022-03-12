@@ -16,7 +16,7 @@ server.listen(config.SERVER.port, () => {
 
   // connect to mongoose
   mongoose.connect(config.MONGO.url, config.MONGO.options, () =>
-  console.log(`Connected to mongodb collection ${config.MONGO.collection}`)
+    console.log(`Connected to mongodb collection ${config.MONGO.collection}`)
   );
 
   // add logging with morgan
@@ -27,7 +27,9 @@ server.listen(config.SERVER.port, () => {
   server.use(express.urlencoded({ extended: true }));
 
   // cors setup
-  server.use(cors());
+  server.use(
+    cors({ origin: "https://jonathandpotter.github.io/upc-tracker-front/" })
+  );
 
   // routes
   server.use("/", indexRoutes);
