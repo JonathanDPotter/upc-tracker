@@ -38,28 +38,24 @@ const login = async (req: Request, res: Response) => {
 
 const register = async (req: Request, res: Response) => {
   let { username, password, key } = req.body as Iuser;
-  if (key !== config.SERVER.apiKey) {
-    return res.json({ message: "Bad API key!" });
-  } else {
-    try {
-      const exists = await User.findOne({ username }).exec();
+  try {
+    const exists = await User.findOne({ username }).exec();
 
-      if (exists) {
-        return res.json({ message: "Username already in use." });
-      } else {
-        const hash = await bcrypt.hash(password, 10);
+    if (exists) {
+      return res.json({ message: "Username already in use." });
+    } else {
+      const hash = await bcrypt.hash(password, 10);
 
-        const newUser = new User({
-          username,
-          password: hash,
-        });
+      const newUser = new User({
+        username,
+        password: hash,
+      });
 
-        const { _id } = await newUser.save();
-        res.status(201).json({ _id, username });
-      }
-    } catch (error: any) {
-      res.json({ error });
+      const { _id } = await newUser.save();
+      res.status(201).json({ _id, username });
     }
+  } catch (error: any) {
+    res.json({ error });
   }
 };
 
