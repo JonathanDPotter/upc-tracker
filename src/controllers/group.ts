@@ -13,7 +13,7 @@ const makeGroup = async (req: Request, res: Response) => {
 
 const getGroups = async (req: Request, res: Response) => {
   try {
-    const groups = await Group.find({user: req.params.user});
+    const groups = await Group.find();
     res.status(200).json(groups);
   } catch (error: any) {
     res.json(error);
