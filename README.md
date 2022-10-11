@@ -29,7 +29,7 @@ For example, I can enter 5 UPCs and title the group "submitted as UNFI DIS". Thi
 
 /api/group
 
-- GET/ -returns all groups
+- GET/ -returns all groups created by this user
 - GET/:\_id -returns group with \_id provided
 - POST/, creates a group, must have [protected route]
 - PUT/:\_id -updates group with \_id provided [protected route]

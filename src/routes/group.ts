@@ -6,7 +6,7 @@ const router = Router();
 
 router.post("/", extractJWT, controller.makeGroup);
 
-router.get("/", controller.getGroups);
+router.get("/:user", controller.getGroups);
 
 router.get("/:_id", controller.getGroup);
 
