@@ -13,7 +13,6 @@ const {
   SERVER_TOKEN_EXPIRETIME,
   SERVER_TOKEN_ISSUER,
   SERVER_TOKEN_SECRET,
-  SERVER_API_KEY,
 } = process.env;
 
 const SERVER = {
@@ -29,7 +28,6 @@ const SERVER = {
     issuer: SERVER_TOKEN_ISSUER,
     secret: SERVER_TOKEN_SECRET || "secret",
   },
-  apiKey: SERVER_API_KEY,
 };
 
 const MONGO = {

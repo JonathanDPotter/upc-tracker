@@ -23,7 +23,7 @@ const login = async (req: Request, res: Response) => {
       if (isAuth) {
         signJWT(user, (error, token) => {
           if (error) res.json({ message: "Unauthorized" });
-          if (token) res.status(200).json({ token });
+          if (token) res.status(200).json({ token, user });
         });
       } else {
         res.json({ message: "Unauthorized" });
@@ -37,7 +37,7 @@ const login = async (req: Request, res: Response) => {
 };
 
 const register = async (req: Request, res: Response) => {
-  let { username, password, key } = req.body as Iuser;
+  let { username, password } = req.body as Iuser;
   try {
     const exists = await User.findOne({ username }).exec();
 
