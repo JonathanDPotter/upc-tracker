@@ -9,7 +9,8 @@
     "start": "node dist/server.js"
   },
   "engines": {
-    "node": "17.5.0"
+    "node": "17.5.0",
+    "npm": "8.19.2"
   },
   "keywords": [
     "mongo",
