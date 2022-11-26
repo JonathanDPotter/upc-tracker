@@ -1,6 +1,6 @@
 # UPC tracker API
 
-## personal utility for tracking the process of UPCs I have entered for review
+## personal utility for tracking the progress of UPCs I have entered for review
 
 ### Overview
 
