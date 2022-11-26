@@ -2,10 +2,11 @@
   "name": "upc-tracker",
   "version": "1.0.0",
   "description": "api for upc tracker front end",
-  "main": "server.ts",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "postinstall": "tsc",
+    "build": "tsc",
+    "postinstall": "npm run build",
     "start": "node dist/server.js"
   },
   "engines": {
@@ -23,7 +24,6 @@
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
-    "@types/helmet": "^4.0.0",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/morgan": "^1.9.3",
     "bcrypt": "^5.0.1",
