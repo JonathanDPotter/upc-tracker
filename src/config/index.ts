@@ -15,7 +15,7 @@ const {
   SERVER_TOKEN_SECRET,
 } = process.env;
 
-const SERVER = {
+const server = {
   hostname: HOSTNAME,
   port: PORT,
   env: NODE_ENV,
@@ -30,15 +30,15 @@ const SERVER = {
   },
 };
 
-const MONGO = {
+const mongo = {
   user: MONGO_USER,
-  pasword: MONGO_PASSWORD,
+  password: MONGO_PASSWORD,
   host: MONGO_HOST,
   collection: MONGO_COLLECTION,
   url: `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_COLLECTION}`,
   options: { retryWrites: true },
 };
 
-const config = { SERVER, MONGO };
+const config = { server, mongo };
 
 export default config;

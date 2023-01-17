@@ -1,116 +1,87 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-// interfaces
-import Iuser from "../interfaces/user";
-import User from "../models/user";
-// utils
-import signJWT from "../middleware/signJWT";
-import config from "../config";
+import { omit } from "lodash";
+import { CreateUserInput } from "../schemas/user.schema";
+import {
+  createUser,
+  getAllUsers,
+  getUser,
+  deleteUser,
+  login,
+} from "../services/user.service";
 
-const validateToken = (req: Request, res: Response) => {
-  return res.status(200).json({ message: "Token validated, user authorized." });
-};
-
-const login = async (req: Request, res: Response) => {
-  let { username, password } = req.body as Iuser;
-
+const validateUserHandler = async (_req: Request, res: Response) => {
   try {
-    const user = await User.findOne({ username });
-
-    if (user) {
-      const isAuth = await bcrypt.compare(password, user.password);
-
-      if (isAuth) {
-        signJWT(user, (error, token) => {
-          if (error) res.json({ message: "Unauthorized" });
-          if (token) res.status(200).json({ token, user });
-        });
-      } else {
-        res.json({ message: "Unauthorized" });
-      }
-    } else {
-      res.json({ message: "User not found." });
-    }
+    return res.sendStatus(200);
   } catch (error: any) {
-    res.json({ error });
+    console.log(error.message);
+    return res.status(401).send(error.message);
   }
 };
 
-const register = async (req: Request, res: Response) => {
-  let { username, password } = req.body as Iuser;
+const createUserHandler = async (
+  req: Request<{}, {}, CreateUserInput["body"]>,
+  res: Response
+) => {
   try {
-    const exists = await User.findOne({ username }).exec();
-
-    if (exists) {
-      return res.json({ message: "Username already in use." });
-    } else {
-      const hash = await bcrypt.hash(password, 10);
-
-      const newUser = new User({
-        username,
-        password: hash,
-      });
-
-      const { _id } = await newUser.save();
-      res.status(201).json({ _id, username });
-    }
+    const user = await createUser(req.body);
+    return res.json(omit(user, "password"));
   } catch (error: any) {
-    res.json({ error });
+    console.log(error.message);
+    return res.status(409).send(error.message);
   }
 };
 
-const getUsers = async (req: Request, res: Response) => {
+const loginHandler = async (req: Request, res: Response) => {
+  let { username, password } = req.body;
+
   try {
-    const users = await User.find().select("-password");
-    res.status(200).json(users);
+    const token = await login(username, password);
+    return res.json(token);
   } catch (error: any) {
-    res.json(error);
+    console.log(error.message);
+    return res.status(500).json(error.message);
   }
 };
 
-const getUser = async (req: Request, res: Response) => {
+const getAllUsersHandler = async (_req: Request, res: Response) => {
   try {
-    const user = await User.findById(req.params._id);
-    res.status(200).json(User);
+    const users = await getAllUsers();
+    return res.json(users);
   } catch (error: any) {
-    res.json(error);
+    console.log(error.message);
+    return res.status(500).json(error.message);
   }
 };
 
-const updateUser = async (req: Request, res: Response) => {
+const getUserHandler = async (req: Request, res: Response) => {
+  const { _id } = req.params;
   try {
-    const result = await User.findByIdAndUpdate(req.params, req.body, {
-      new: true,
-    });
-    if (result) {
-      const { _id } = result;
-      res.status(200).json({ _id, message: "updated" });
-    }
+    const user = await getUser(_id);
+    return res.json(user);
   } catch (error: any) {
-    res.json(error);
+    console.log(error.message);
+    return res.status(500).json(error.message);
   }
 };
 
-const deleteUser = async (req: Request, res: Response) => {
+const deleteUserHandler = async (req: Request, res: Response) => {
+  const { _id } = req.params;
   try {
-    const deleted = await User.findByIdAndDelete(req.params._id);
-    if (deleted) {
-      const { username } = deleted;
-      res.status(200).json({ username, message: "deleted" });
-    }
+    const user = await deleteUser(_id);
+    return res.json(`Successfully deleted ${user?.username}`);
   } catch (error: any) {
-    res.json(error);
+    console.log(error.message);
+    return res.status(500).json(error.message);
   }
 };
 
 const controller = {
-  validateToken,
-  register,
-  login,
-  getUsers,
-  getUser,
-  updateUser,
-  deleteUser,
+  validateUserHandler,
+  createUserHandler,
+  loginHandler,
+  getAllUsersHandler,
+  getUserHandler,
+  deleteUserHandler,
 };
 
 export default controller;

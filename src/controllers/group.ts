@@ -1,54 +1,88 @@
 import { Request, Response } from "express";
-import Group from "../models/group";
+import { CreateGroupInput } from "../schemas/group.schema";
+import {
+  createGroup,
+  getAllGroups,
+  getGroup,
+  deleteGroup,
+  updateGroup,
+  getUserGroups,
+} from "../services/group.service";
 
-const makeGroup = async (req: Request, res: Response) => {
+const creategroupHandler = async (
+  req: Request<{}, {}, CreateGroupInput["body"]>,
+  res: Response
+) => {
   try {
-    const newGroup = new Group(req.body);
-    const result = await newGroup.save();
-    res.status(201).json(result);
+    const group = await createGroup(req.body);
+    return res.json(group);
   } catch (error: any) {
-    res.json(error);
+    console.log(error);
+    return res.status(500).json(error.message);
   }
 };
 
-const getGroups = async (req: Request, res: Response) => {
+const getAllgroupsHandler = async (_req: Request, res: Response) => {
   try {
-    const groups = await Group.find();
-    res.status(200).json(groups);
+    const groups = await getAllGroups();
+    return res.json(groups);
   } catch (error: any) {
-    res.json(error);
+    console.log(error);
+    return res.status(500).json(error.message);
   }
 };
 
-const getGroup = async (req: Request, res: Response) => {
+const getgroupHandler = async (req: Request, res: Response) => {
+  const { _id } = req.params;
   try {
-    const group = await Group.findById(req.params._id);
-    res.status(200).json(group);
+    const group = await getGroup(_id);
+    return res.json(group);
   } catch (error: any) {
-    res.json(error);
+    console.log(error);
+    return res.status(500).json(error.message);
   }
 };
 
-const updateGroup = async (req: Request, res: Response) => {
+const getUsergroupsHandler = async (req: Request, res: Response) => {
+  const { _id } = req.params;
   try {
-    const result = await Group.findByIdAndUpdate(req.params, req.body, {
-      new: true,
-    });
-    res.status(200).json(result);
+    const groups = await getUserGroups(_id);
+    return res.json(groups);
   } catch (error: any) {
-    res.json(error);
+    console.log(error);
+    return res.status(500).json(error.message);
   }
 };
 
-const deleteGroup = async (req: Request, res: Response) => {
+const updategroupHandler = async (req: Request, res: Response) => {
+  const { _id } = req.params;
   try {
-    const deleted = await Group.findByIdAndDelete(req.params._id);
-    res.status(200).json(deleted);
+    const group = await updateGroup(_id, req.body);
+    return res.json(group);
   } catch (error: any) {
-    res.json(error);
+    console.log(error);
+    return res.status(500).json(error.message);
   }
 };
 
-const controller = { makeGroup, getGroups, getGroup, updateGroup, deleteGroup };
+const deletegroupHandler = async (req: Request, res: Response) => {
+  const { _id } = req.params;
+  try {
+    const group = await deleteGroup(_id);
+    return res.json(`Successfully deleted ${group?.title}`);
+  } catch (error: any) {
+    console.log(error);
+    return res.status(500).json(error.message);
+  }
+};
+
+const controller = {
+  creategroupHandler,
+  getAllgroupsHandler,
+  getgroupHandler,
+  getUsergroupsHandler,
+  updategroupHandler,
+  deletegroupHandler,
+};
 
 export default controller;

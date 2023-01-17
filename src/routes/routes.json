@@ -1,0 +1,32 @@
+{
+  "user": {
+    "ROOT": "/api/user",
+    "GET": {
+      "/validate": "validates user by bearer token",
+      "/": "returns all user records",
+      "/:_id": "returns user record with specific _id"
+    },
+    "POST": {
+      "/register": "creates a new user from {username, password}",
+      "/login": "returns validation token from {username, password}"
+    },
+    "put": { "/:_id": "updates user record with specific _id" },
+    "delete": { "/:_id": "deletes user with specific _id" }
+  },
+  "group": {
+    "ROOT": "/api/group",
+    "GET": {
+      "/": "returns all group records",
+      "/:_id": "returns group record with specific _id"
+    },
+    "POST": {
+      "/": "creates a new group record with {title, upcs}"
+    },
+    "PUT": { "/:_id": "updates group record with specific _id" },
+    "DELETE": { "/:_id": "deletes group with specific _id" }
+  },
+  "index": {
+    "ROOT": "/",
+    "GET": { "/": "returns this json object" }
+  }
+}
