@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  about
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Blog-API</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <script src="index.js" type="text/javascript" defer></script>
+  </head>
+  <body>
+    <header-component></header-component>
+    <main>
+      <section>
+        <h2>About</h2>
+        <p>
+          This application was built with Express.js and TypeScript. The API
+          routes follow a RESTful pattern, and the "/" and "/about" pages are
+          built with vanilla JS, HTML, and SCSS. The API connects to a MongoDB
+          database to store data.
+        </p>
+      </section>
+      <section>
+        <h2>Technologies used</h2>
+        <p>
+          This app uses bcrypt for encryption of passwords, mongoose for
+          database management, cors for cross-origin resource handling,
+          jsonwebtoken for producing authentication tokens, lodash for
+          utilities, morgan for logging, zod for validation and jest and
+          supertest for testing.
+        </p>
+      </section>
+    </main>
+    <footer-component link-name="home"></footer-component>
+  </body>
 </html>

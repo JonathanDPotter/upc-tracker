@@ -1,12 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  home
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <script src="index.js" type="text/javascript" defer></script>
+    <script
+      src="https://kit.fontawesome.com/49df7f434d.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>UPC Tracker</title>
+  </head>
+  <body>
+    <header-component></header-component>
+    <main>
+      <section>
+        <h2>Welcome to the back-end for UPC Tracker</h2>
+        <p>
+          This is the back-end for my UPC tracking project. The app is intended
+          to allow me to easily keep lists of UPCs and share them between my
+          phone, a web app, and other applications that I use at work. The
+          records are stored on a MongoDB database and can be copied from the
+          front end to excel or other applications.
+        </p>
+        <p>
+          I have already completed a working React Native front-end which is
+          available as both a web app and an android app available on the play
+          store. I plan to add a Vue.js and AngularJS front end as well.
+        </p>
+      </section>
+      <section>
+        <h2>Routes</h2>
+        <p>
+          You can send a GET request to <a href="/routes">/routes</a> to get a
+          JSON object with a list of the available routes which are as follows:
+        </p>
+        <div class="routes"></div>
+      </section>
+      <section>
+        <h2>Links</h2>
+        <p>Click below to go to:</p>
+        <div class="buttons">
+          <a href="https://github.com/JonathanDPotter/upc-tracker"
+            ><button type="button">
+              back-end repo
+              <img
+                src="./icons/github.svg"
+                alt="github icon"
+                height="20px"
+                width="20px"
+              /></button
+          ></a>
+          <a href="https://github.com/JonathanDPotter/upc-tracker-front"
+            ><button type="button">
+              react front-end repo
+              <img
+                src="./icons/github.svg"
+                alt="GitHub icon"
+                height="20px"
+                width="20px"
+              /></button
+          ></a>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.jonathandpotter.upctracker&hl=en_US&gl=US"
+            ><button type="button">
+              android app on play store<img
+                src="./icons//playStore.svg"
+                alt="Google Play Store icon"
+                height="20px"
+                width="20px"
+              /></button
+          ></a>
+          <a href="https://upc-tracker.vercel.app/"
+            ><button type="button">
+              web app<img
+                src="./icons//react.svg"
+                alt="React.js icon"
+                height="20px"
+                width="20px"
+              /></button
+          ></a>
+        </div>
+      </section>
+    </main>
+    <footer-component link-name="about"></footer-component>
+  </body>
 </html>

@@ -1,0 +1,119 @@
+@use "./partials/colors" as *;
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  top: 0;
+}
+
+body {
+  font-family: "PT Sans", sans-serif;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+@mixin header-footer {
+  height: 10vh;
+  width: 100vw;
+  background-color: $dark;
+  color: $text-light;
+  line-height: 10vh;
+  left: 0;
+}
+
+header {
+  @include header-footer;
+  border-bottom: 0.25rem solid $primary;
+  h1 {
+    margin-left: 1rem;
+  }
+}
+
+main {
+  min-height: 80vh;
+
+  section {
+    margin: 1rem;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+  }
+
+  .routes {
+    margin: 1rem;
+
+    .route-list {
+      margin-left: 1rem;
+    }
+  }
+  .buttons {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+
+    button {
+      border: 2px solid $secondary;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+
+      img {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}
+
+main.not-found {
+  background-color: $dark;
+  color: $text-light;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  img {
+    width: 50vh;
+    margin: auto;
+  }
+
+  a {
+    border: 0.5rem solid $secondary;
+    border-radius: 0.5rem;
+    font-size: 3rem;
+    background-color: $dark;
+    color: $text-light;
+    padding: 1rem;
+    margin: 1rem auto;
+    text-decoration: none;
+  }
+}
+
+footer {
+  @include header-footer;
+  border-top: 0.25rem solid $primary;
+  display: grid;
+  grid-template: "credits middle link" auto / 2fr 1fr 1fr;
+  text-align: center;
+
+  span {
+    grid-area: credits;
+  }
+
+  a {
+    grid-area: link;
+    color: $text-light;
+    text-transform: capitalize;
+  }
+}

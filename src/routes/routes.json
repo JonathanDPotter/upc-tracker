@@ -27,6 +27,11 @@
   },
   "index": {
     "ROOT": "/",
-    "GET": { "/": "returns this json object" }
+    "GET": {
+      "/": "returns the home page",
+      "/about": "returns the about page",
+      "/routes": "returns this json object",
+      "/healtcheck": "returns an 'OK' statuscode if the server is running"
+    }
   }
 }
