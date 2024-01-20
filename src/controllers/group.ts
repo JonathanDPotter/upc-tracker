@@ -9,7 +9,7 @@ import {
   getUserGroups,
 } from "../services/group.service";
 
-const creategroupHandler = async (
+const createGroupHandler = async (
   req: Request<{}, {}, CreateGroupInput["body"]>,
   res: Response
 ) => {
@@ -22,7 +22,7 @@ const creategroupHandler = async (
   }
 };
 
-const getAllgroupsHandler = async (_req: Request, res: Response) => {
+const getAllGroupsHandler = async (_req: Request, res: Response) => {
   try {
     const groups = await getAllGroups();
     return res.json(groups);
@@ -32,7 +32,7 @@ const getAllgroupsHandler = async (_req: Request, res: Response) => {
   }
 };
 
-const getgroupHandler = async (req: Request, res: Response) => {
+const getGroupHandler = async (req: Request, res: Response) => {
   const { _id } = req.params;
   try {
     const group = await getGroup(_id);
@@ -43,7 +43,7 @@ const getgroupHandler = async (req: Request, res: Response) => {
   }
 };
 
-const getUsergroupsHandler = async (req: Request, res: Response) => {
+const getUserGroupsHandler = async (req: Request, res: Response) => {
   const { _id } = req.params;
   try {
     const groups = await getUserGroups(_id);
@@ -54,7 +54,7 @@ const getUsergroupsHandler = async (req: Request, res: Response) => {
   }
 };
 
-const updategroupHandler = async (req: Request, res: Response) => {
+const updateGroupHandler = async (req: Request, res: Response) => {
   const { _id } = req.params;
   try {
     const group = await updateGroup(_id, req.body);
@@ -65,7 +65,7 @@ const updategroupHandler = async (req: Request, res: Response) => {
   }
 };
 
-const deletegroupHandler = async (req: Request, res: Response) => {
+const deleteGroupHandler = async (req: Request, res: Response) => {
   const { _id } = req.params;
   try {
     const group = await deleteGroup(_id);
@@ -77,12 +77,12 @@ const deletegroupHandler = async (req: Request, res: Response) => {
 };
 
 const controller = {
-  creategroupHandler,
-  getAllgroupsHandler,
-  getgroupHandler,
-  getUsergroupsHandler,
-  updategroupHandler,
-  deletegroupHandler,
+  createGroupHandler,
+  getAllGroupsHandler,
+  getGroupHandler,
+  getUserGroupsHandler,
+  updateGroupHandler,
+  deleteGroupHandler,
 };
 
 export default controller;

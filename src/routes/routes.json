@@ -17,7 +17,8 @@
     "ROOT": "/api/group",
     "GET": {
       "/": "returns all group records",
-      "/:_id": "returns group record with specific _id"
+      "/:_id": "returns group record with specific _id",
+      "/user/:_id": "returns all groups records with specific user_id"
     },
     "POST": {
       "/": "creates a new group record with {title, upcs}"
